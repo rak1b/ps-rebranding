@@ -1,26 +1,259 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand — sky blue on white, deep navy ink */
+  --color-brand-50: #f0f9ff;
+  --color-brand-100: #e0f2fe;
+  --color-brand-200: #b9e6fe;
+  --color-brand-300: #7cd4fd;
+  --color-brand-400: #36bffa;
+  --color-brand-500: #0ba5ec;
+  --color-brand-600: #0086c9;
+  --color-brand-700: #026aa2;
+  --color-brand-800: #065986;
+  --color-brand-900: #0b4a6f;
+
+  --color-ink-950: #061325;
+  --color-ink-900: #0a1b33;
+  --color-ink-800: #10263f;
+  --color-ink-700: #1e3a56;
+  --color-ink-600: #33506e;
+  --color-ink-500: #4d6a88;
+  --color-ink-400: #7290ad;
+  --color-ink-300: #a3bcd4;
+  --color-ink-200: #cfdeed;
+  --color-ink-100: #e8f0f8;
+  --color-ink-50: #f4f8fc;
+
+  --color-mint-400: #2dd4bf;
+  --color-mint-500: #14b8a6;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-grotesk), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-script: var(--font-caveat), "Segoe Script", cursive;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-slow: marquee 55s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 55s linear infinite;
+  --animate-aurora-1: aurora-1 14s ease-in-out infinite alternate;
+  --animate-aurora-2: aurora-2 18s ease-in-out infinite alternate;
+  --animate-aurora-3: aurora-3 16s ease-in-out infinite alternate;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delay: float 7s ease-in-out 1.2s infinite;
+  --animate-ripple: ripple 1.8s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  --animate-shine: shine 2.75s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 1.6s ease-in-out infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-ticker: ticker 1.2s steps(1) infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes aurora-1 {
+  0% {
+    transform: translate(-8%, -4%) scale(1);
+  }
+  50% {
+    transform: translate(10%, 8%) scale(1.15);
+  }
+  100% {
+    transform: translate(-4%, 10%) scale(0.95);
+  }
+}
+
+@keyframes aurora-2 {
+  0% {
+    transform: translate(6%, 10%) scale(1.05);
+  }
+  50% {
+    transform: translate(-10%, -6%) scale(0.9);
+  }
+  100% {
+    transform: translate(8%, -10%) scale(1.12);
+  }
+}
+
+@keyframes aurora-3 {
+  0% {
+    transform: translate(0%, 0%) scale(0.9);
+  }
+  100% {
+    transform: translate(-12%, 12%) scale(1.18);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.35);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  60%,
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes ticker {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Lenis smooth-scroll: let Lenis own scrolling when active */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-ink-900);
+}
+
+/* Subtle dot grid used behind hero / CTA */
+.bg-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(11, 74, 111, 0.14) 1px,
+    transparent 0
+  );
+  background-size: 26px 26px;
+}
+
+/* Text gradient for headline accents */
+.text-gradient {
+  background: linear-gradient(
+    100deg,
+    var(--color-brand-600) 0%,
+    var(--color-brand-400) 55%,
+    var(--color-mint-400) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glass card */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Gradient border wrapper (popular pricing card, etc.) */
+.gradient-border {
+  position: relative;
+  background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(
+        135deg,
+        var(--color-brand-400),
+        var(--color-brand-600) 45%,
+        var(--color-mint-400)
+      )
+      border-box;
+  border: 2px solid transparent;
+}
+
+/* Marquee fade edges */
+.mask-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

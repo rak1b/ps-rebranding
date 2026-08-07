@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PaymentSave — Rebrand Landing Page
 
-## Getting Started
+A fully animated rebrand concept for [paymentsave.co.uk](https://paymentsave.co.uk), built with Next.js. White + sky-blue brand palette, design and motion language inspired by modern fintech leaders.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, Turbopack, fully static output)
+- **Tailwind CSS v4** — design tokens in `app/globals.css` via `@theme`
+- **Framer Motion** — scroll reveals, springs, layout animations, the terminal state machine
+- **Lenis** — buttery smooth scrolling
+- **next/font** — self-hosted Inter (body) + Space Grotesk (display)
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # development on http://localhost:3000
+npm run build    # production build
+npm start        # serve the production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Highlights
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Animated payment terminal** (`components/Terminal.tsx`) — a CSS-built card machine that loops a real payment: amount keyed in digit-by-digit → contactless tap with ripple rings and a card flying in → processing → approved with an SVG-drawn checkmark and confetti burst. Live payment toasts and a payout chip float alongside.
+- **Interactive savings calculator** — drag a turnover slider, watch the yearly saving spring-update; fee comparison bars grow on scroll.
+- **Live transaction feed** — Teya-style dashboard mock where new sales slide in every couple of seconds and the daily total ticks up.
+- **Ambient motion everywhere** — aurora gradient blobs, dual-direction testimonial marquees (pause on hover), magnetic CTAs with shine sweeps, count-up stats, tilt-on-hover product cards, glass navbar with scroll progress bar, staggered mobile menu.
+- **Performance & accessibility** — transform/opacity-only animations, zero external images (all SVG/CSS), static prerender, and full `prefers-reduced-motion` support (CSS loops stop, terminal settles on its success state).
