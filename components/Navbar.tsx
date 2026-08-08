@@ -56,10 +56,7 @@ export default function Navbar() {
       />
 
       <motion.header
-        initial={{ y: -64, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        className={`animate-nav-drop fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
           scrolled
             ? "glass border-b border-ink-100 shadow-[0_8px_30px_-12px_rgba(6,19,37,0.12)]"
             : "border-b border-transparent bg-transparent"

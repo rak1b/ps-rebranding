@@ -28,6 +28,7 @@ function useIsDesktop() {
   return desktop;
 }
 
+/** CSS-driven write-on: renders even if JavaScript never hydrates */
 function BlurWord({
   children,
   delay,
@@ -38,15 +39,12 @@ function BlurWord({
   className?: string;
 }) {
   return (
-    <motion.span
-      initial={{ opacity: 0, y: 24, rotate: -7, filter: "blur(10px)" }}
-      animate={{ opacity: 1, y: 0, rotate: 0, filter: "blur(0px)" }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
-      style={{ transformOrigin: "0% 100%" }}
-      className={`inline-block ${className}`}
+    <span
+      style={{ animationDelay: `${delay}s`, transformOrigin: "0% 100%" }}
+      className={`inline-block animate-rise-in ${className}`}
     >
       {children}
-    </motion.span>
+    </span>
   );
 }
 
@@ -336,21 +334,17 @@ export default function Hero() {
                   </BlurWord>
                 </h1>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.95, ease: EASE }}
-                  className="mt-6 max-w-xl text-balance text-center text-base font-medium text-ink-600 sm:text-lg"
+                <p
+                  style={{ animationDelay: "0.95s" }}
+                  className="mt-6 max-w-xl animate-fade-up text-balance text-center text-base font-medium text-ink-600 sm:text-lg"
                 >
                   Card payments for UK businesses — low fees, next-day
                   settlement, 24/7 support.
-                </motion.p>
+                </p>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 1.15, ease: EASE }}
-                  className="mt-9"
+                <div
+                  style={{ animationDelay: "1.15s" }}
+                  className="mt-9 animate-fade-up"
                 >
                   <Magnetic>
                     <a
@@ -364,13 +358,11 @@ export default function Hero() {
                       <span className="pointer-events-none absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine motion-reduce:animate-none" />
                     </a>
                   </Magnetic>
-                </motion.div>
+                </div>
 
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 1.4 }}
-                  className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-xs font-semibold text-ink-500"
+                <p
+                  style={{ animationDelay: "1.4s" }}
+                  className="mt-6 flex animate-fade-up flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-xs font-semibold text-ink-500"
                 >
                   <span className="flex items-center gap-1">
                     <span className="text-[#00b67a]">★★★★★</span> 5.0 on
@@ -384,7 +376,7 @@ export default function Hero() {
                     ·
                   </span>
                   <span>No hidden fees</span>
-                </motion.p>
+                </p>
               </motion.div>
             </motion.div>
 
