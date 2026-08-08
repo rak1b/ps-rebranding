@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import {
+  AnimatePresence,
   motion,
   useMotionTemplate,
   useMotionValue,
@@ -98,6 +99,71 @@ function OrbitItem({
       >
         {children}
       </div>
+    </div>
+  );
+}
+
+const POP_DEVICES = [
+  "/devices/ps-one-upright-t.png",
+  "/devices/ps-one-angle-t.png",
+  "/devices/ps-one-duo-t.png",
+  "/devices/ps-one-flat-t.png",
+  "/devices/ps-one-side-t.png",
+];
+
+const POP_SPOTS = [
+  "left-[6%] top-[14%]",
+  "right-[5%] top-[18%]",
+  "left-[7%] bottom-[16%]",
+  "right-[6%] bottom-[20%]",
+];
+
+/** Ghosted terminals popping in and out of the corner lanes */
+function DevicePops() {
+  const reduce = useReducedMotion();
+  const counter = useRef(1);
+  const [items, setItems] = useState([
+    { id: 0, img: POP_DEVICES[0], spot: POP_SPOTS[0] },
+    { id: 1, img: POP_DEVICES[1], spot: POP_SPOTS[3] },
+  ]);
+
+  useEffect(() => {
+    if (reduce) return;
+    const t = setInterval(() => {
+      counter.current += 1;
+      const c = counter.current;
+      setItems((prev) => [
+        prev[1],
+        { id: c, img: POP_DEVICES[c % 5], spot: POP_SPOTS[c % 4] },
+      ]);
+    }, 4200);
+    return () => clearInterval(t);
+  }, [reduce]);
+
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
+      <AnimatePresence>
+        {items.map((item) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, scale: 0.5, y: 34, rotate: -10 }}
+            animate={{ opacity: 0.45, scale: 1, y: 0, rotate: -4 }}
+            exit={{ opacity: 0, scale: 0.6, y: 24, rotate: 6 }}
+            transition={{ type: "spring", stiffness: 130, damping: 16 }}
+            className={`absolute ${item.spot}`}
+          >
+            <div className="animate-float motion-reduce:animate-none">
+              <Image
+                src={item.img}
+                alt=""
+                width={300}
+                height={300}
+                className="h-auto w-28 drop-shadow-[0_18px_28px_rgba(2,74,111,0.25)] xl:w-36"
+              />
+            </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
   );
 }
@@ -380,21 +446,8 @@ export default function Hero() {
               </motion.div>
             </motion.div>
 
-            {/* Floating £ bubbles */}
-            {[
-              { pos: "left-[6%] top-[18%]", delay: "0s" },
-              { pos: "right-[8%] top-[24%]", delay: "1.2s" },
-              { pos: "left-[10%] bottom-[26%]", delay: "2.1s" },
-              { pos: "right-[10%] bottom-[30%]", delay: "0.7s" },
-            ].map((bubble) => (
-              <span
-                key={bubble.pos}
-                style={{ animationDelay: bubble.delay }}
-                className={`absolute hidden h-11 w-11 items-center justify-center rounded-full bg-brand-500/10 font-display text-sm font-bold text-brand-600/80 opacity-70 ring-1 ring-brand-200/80 backdrop-blur-sm animate-float motion-reduce:animate-none sm:flex ${bubble.pos}`}
-              >
-                £
-              </span>
-            ))}
+            {/* Ghosted devices popping through the corner lanes */}
+            <DevicePops />
 
             {/* Live payments ticker */}
             <div className="mask-fade-x absolute inset-x-0 bottom-6 overflow-hidden">
