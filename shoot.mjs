@@ -12,12 +12,17 @@ page.on("console", (m) => {
 page.on("pageerror", (e) => logs.push(`[pageerror] ${e}`));
 
 await page.goto("http://localhost:3111", { waitUntil: "networkidle" });
+await page.waitForTimeout(2600);
+
+await page.evaluate((v) => window.scrollTo(0, v), 1060);
 await page.waitForTimeout(2800);
-await page.screenshot({ path: `${OUT}/v17-pop-a.png` });
-console.log("shot A");
-await page.waitForTimeout(4600);
-await page.screenshot({ path: `${OUT}/v17-pop-b.png` });
-console.log("shot B");
+await page.screenshot({ path: `${OUT}/v18-flow.png` });
+console.log("shot flow act");
+
+await page.evaluate((v) => window.scrollTo(0, v), 7450);
+await page.waitForTimeout(2600);
+await page.screenshot({ path: `${OUT}/v18-neon.png` });
+console.log("shot neon");
 
 await browser.close();
 console.log("ERRORS:\n" + (logs.join("\n") || "(none)"));

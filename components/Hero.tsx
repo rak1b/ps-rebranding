@@ -468,12 +468,101 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Act II — message in ink on the light stage */}
+          {/* Act II — message over the animated tap→bank money stream */}
           <motion.div
             style={{ opacity: pinned ? msgOpacity : 0, y: msgY }}
             className="absolute inset-0 z-20 hidden items-center justify-center px-8 lg:flex"
           >
-            <p className="max-w-3xl text-center font-display text-5xl font-bold leading-tight tracking-tight text-ink-950 xl:text-6xl">
+            {/* The flow: dashed stream with payments travelling tap → bank */}
+            <svg
+              aria-hidden
+              viewBox="0 0 1200 420"
+              fill="none"
+              className="absolute left-1/2 top-1/2 w-[92vw] max-w-[1400px] -translate-x-1/2 -translate-y-1/2 opacity-80"
+            >
+              <defs>
+                <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#7cd4fd" />
+                  <stop offset="55%" stopColor="#0ba5ec" />
+                  <stop offset="100%" stopColor="#2dd4bf" />
+                </linearGradient>
+              </defs>
+              <path
+                id="flowPath"
+                d="M60 210 C 280 60, 460 360, 700 160 S 1040 120, 1140 210"
+                stroke="url(#flowGrad)"
+                strokeWidth="2"
+                strokeDasharray="5 12"
+                strokeLinecap="round"
+                opacity="0.55"
+              />
+              <circle r="6" fill="#0ba5ec">
+                <animateMotion dur="7s" repeatCount="indefinite">
+                  <mpath href="#flowPath" />
+                </animateMotion>
+              </circle>
+              <circle r="4.5" fill="#2dd4bf">
+                <animateMotion dur="7s" begin="2.3s" repeatCount="indefinite">
+                  <mpath href="#flowPath" />
+                </animateMotion>
+              </circle>
+              <circle r="3.5" fill="#7cd4fd">
+                <animateMotion dur="7s" begin="4.6s" repeatCount="indefinite">
+                  <mpath href="#flowPath" />
+                </animateMotion>
+              </circle>
+              {/* A travelling payment */}
+              <g>
+                <rect
+                  x="-38"
+                  y="-30"
+                  width="76"
+                  height="24"
+                  rx="12"
+                  fill="#ffffff"
+                  stroke="#e8f0f8"
+                />
+                <text
+                  x="0"
+                  y="-13.5"
+                  textAnchor="middle"
+                  fontSize="12"
+                  fontWeight="700"
+                  fill="#14b8a6"
+                >
+                  +£24.50
+                </text>
+                <animateMotion dur="7s" begin="1.2s" repeatCount="indefinite">
+                  <mpath href="#flowPath" />
+                </animateMotion>
+              </g>
+            </svg>
+
+            {/* Anchors: where the flow starts and lands */}
+            <div className="absolute left-[5%] top-1/2 flex -translate-y-1/2 flex-col items-center gap-2">
+              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-brand-600 shadow-[0_18px_40px_-14px_rgba(2,134,201,0.4)] ring-1 ring-ink-100">
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                  <path d="M6.5 8.5a7.5 7.5 0 0 1 0 7" />
+                  <path d="M10 6.5a11 11 0 0 1 0 11" />
+                  <path d="M13.5 4.5a14.5 14.5 0 0 1 0 15" />
+                </svg>
+              </span>
+              <span className="text-xs font-bold uppercase tracking-wider text-ink-400">
+                Tap
+              </span>
+            </div>
+            <div className="absolute right-[5%] top-1/2 flex -translate-y-1/2 flex-col items-center gap-2">
+              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-brand-600 shadow-[0_18px_40px_-14px_rgba(2,134,201,0.4)] ring-1 ring-ink-100">
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 9.5L12 4l9 5.5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3.5 20.5h17" />
+                </svg>
+              </span>
+              <span className="text-xs font-bold uppercase tracking-wider text-ink-400">
+                Bank
+              </span>
+            </div>
+
+            <p className="relative max-w-3xl text-center font-display text-5xl font-bold leading-tight tracking-tight text-ink-950 [text-shadow:0_2px_20px_rgba(255,255,255,0.9)] xl:text-6xl">
               From tap to bank —{" "}
               <span className="text-gradient">one smooth flow.</span>
             </p>

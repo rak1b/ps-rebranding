@@ -142,46 +142,51 @@ export default function NeonProduct() {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="w-[300px] rounded-[2rem] bg-white p-5 shadow-[0_50px_100px_-30px_rgba(2,74,111,0.55)] ring-1 ring-white/70 sm:w-[360px]"
+                  className="w-[320px] sm:w-[420px]"
                 >
-                  <Image
-                    src="/devices/ps-one-angle-t.png"
-                    alt="PS One card terminal"
-                    width={601}
-                    height={492}
-                    className="h-auto w-full drop-shadow-[0_24px_36px_rgba(2,74,111,0.25)]"
+                  <div className="animate-float motion-reduce:animate-none">
+                    <Image
+                      src="/devices/ps-one-angle-t.png"
+                      alt="PS One card terminal"
+                      width={601}
+                      height={492}
+                      className="h-auto w-full drop-shadow-[0_50px_70px_rgba(2,44,64,0.4)]"
+                    />
+                  </div>
+                  {/* Contact shadow on the gradient */}
+                  <span
+                    aria-hidden
+                    className="mx-auto -mt-4 block h-6 w-2/3 rounded-[100%] bg-brand-900/20 blur-lg"
                   />
-                  <div className="flex items-center justify-between px-1 pb-1">
-                    <p className="font-display text-lg font-bold text-ink-950">
+                  <div className="mt-4 flex items-center justify-center gap-3">
+                    <p className="font-display text-xl font-bold text-ink-950">
                       PS One
                     </p>
-                    <span className="rounded-full bg-brand-500/10 px-3 py-1 text-xs font-bold text-brand-700">
+                    <span className="rounded-full bg-white/60 px-3.5 py-1.5 text-xs font-bold text-brand-700 ring-1 ring-white/80 backdrop-blur-sm">
                       From £9.99/mo
                     </span>
                   </div>
                 </motion.div>
               </TiltPhoto>
 
-              {/* Secondary angle, floating */}
+              {/* Secondary angle, floating free */}
               <motion.div
                 initial={{ opacity: 0, y: 30, rotate: -12 }}
                 whileInView={{ opacity: 1, y: 0, rotate: -8 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute -bottom-10 -left-8 hidden w-36 animate-float-delay motion-reduce:animate-none sm:block lg:-left-14"
+                className="absolute -bottom-8 -left-6 hidden w-32 animate-float-delay motion-reduce:animate-none sm:block lg:-left-16"
               >
-                <div className="rounded-2xl bg-white p-2.5 shadow-xl ring-1 ring-ink-100">
-                  <Image
-                    src="/devices/ps-one-flat-t.png"
-                    alt="PS One handheld view"
-                    width={289}
-                    height={296}
-                    className="h-auto w-full drop-shadow-[0_16px_24px_rgba(2,74,111,0.2)]"
-                  />
-                  <p className="mt-1.5 text-center text-[10px] font-bold text-ink-500">
-                    In-screen NFC
-                  </p>
-                </div>
+                <Image
+                  src="/devices/ps-one-flat-t.png"
+                  alt="PS One handheld view"
+                  width={289}
+                  height={296}
+                  className="h-auto w-full drop-shadow-[0_24px_36px_rgba(2,44,64,0.35)]"
+                />
+                <p className="mx-auto mt-1.5 w-fit rounded-full bg-white/60 px-2.5 py-1 text-center text-[10px] font-bold text-ink-700 ring-1 ring-white/80 backdrop-blur-sm">
+                  In-screen NFC
+                </p>
               </motion.div>
             </div>
           </motion.div>
